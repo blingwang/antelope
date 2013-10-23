@@ -1,0 +1,358 @@
+/*
+SQLyog Community Edition- MySQL GUI v7.1 Beta2
+MySQL - 5.0.15-nt : Database - antelopetest
+*********************************************************************
+*/
+
+/*!40101 SET NAMES utf8 */;
+
+/*!40101 SET SQL_MODE=''*/;
+
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+CREATE DATABASE /*!32312 IF NOT EXISTS*/`antelopetest` /*!40100 DEFAULT CHARACTER SET latin1 */;
+
+USE `antelopetest`;
+
+/*Table structure for table `ad` */
+
+DROP TABLE IF EXISTS `ad`;
+
+CREATE TABLE `ad` (
+  `adId` int(2) NOT NULL,
+  `titleOfAd` varchar(50) NOT NULL,
+  `businessAd` varchar(50) NOT NULL,
+  `imageAddressAd` varchar(50) NOT NULL,
+  `urlAd` varchar(50) NOT NULL,
+  `businessContact` varchar(50) NOT NULL,
+  `businessPhone` int(15) NOT NULL,
+  `businessEmail` varchar(50) NOT NULL,
+  `businessAddress` varchar(50) NOT NULL,
+  `active` binary(1) NOT NULL default '1',
+  `size` int(2) NOT NULL default '1',
+  PRIMARY KEY  (`adId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `ad` */
+
+insert  into `ad`(`adId`,`titleOfAd`,`businessAd`,`imageAddressAd`,`urlAd`,`businessContact`,`businessPhone`,`businessEmail`,`businessAddress`,`active`,`size`) values (0,'Demo: Ad Qualification','Qualified Ads','default.jpg','http://www.google.com','Ann Jenkins',865,'qualAds@unk.edu','1014 W. 29th Kearney','1',0),(1,'Demo: Ad of Mine','Ad of Mine','default.jpg','http://www.google.com','DeeDee Younghans',1,'adofmine@gmail.com','W. Hwy 30 Kearney, NE 68845','1',1),(2,'Demo: Ads Rock','Rock Solid Ads','default.jpg','http://www.google.com','Rock On Ads',1,'','','1',2);
+
+/*Table structure for table `article` */
+
+DROP TABLE IF EXISTS `article`;
+
+CREATE TABLE `article` (
+  `articleId` int(8) NOT NULL,
+  `articleTitle` varchar(100) NOT NULL,
+  `dateOfArticle` date NOT NULL,
+  `category` int(2) NOT NULL,
+  `approved` binary(1) NOT NULL default '0',
+  `issueOfArticle` int(6) NOT NULL,
+  `authorId` int(4) NOT NULL,
+  `articleBody` varchar(100) default NULL,
+  `Abstract` varchar(500) default NULL,
+  `pullQuote` varchar(200) default NULL,
+  `BylineID` int(11) NOT NULL default '0',
+  PRIMARY KEY  (`articleId`),
+  KEY `FK_article` (`issueOfArticle`),
+  KEY `FK_articleCategory` (`category`),
+  KEY `FK_articleUser` (`authorId`),
+  CONSTRAINT `FK_article` FOREIGN KEY (`issueOfArticle`) REFERENCES `issue` (`issueId`) ON UPDATE CASCADE,
+  CONSTRAINT `FK_articleCategory` FOREIGN KEY (`category`) REFERENCES `newscategory` (`newsCategoryId`) ON UPDATE CASCADE,
+  CONSTRAINT `FK_articleUser` FOREIGN KEY (`authorId`) REFERENCES `user` (`userId`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `article` */
+
+insert  into `article`(`articleId`,`articleTitle`,`dateOfArticle`,`category`,`approved`,`issueOfArticle`,`authorId`,`articleBody`,`Abstract`,`pullQuote`,`BylineID`) values (2,'UNK Residence Hall Renovations','2008-04-04',1,'1',1,1,'article2.txt','Nebraska Board of Regents approved a $5.2 million renewal project for the residence halls on the University of Nebraska at Kearney campus. The project is part of the estimated $18.5 million seven year Capital renewal plan UNK has proposed to revamp living quarters to create a more appealing campus.','This is a sample pull quote. Its second sentence.',0),(3,'Demo: \"Nose job\" kicks off the campus facelift','2008-04-05',5,'1',2,3,'article3.txt','Capital renewal plan UNK has proposed to revamp living quarters to create a more appealing campus. At their March 7 meeting, the Nebraska Board of Regents approved a $5.2 million renewal project for the residence halls on the University of Nebraska at Kearney campus. ','This is a sample pull quote. Its second sentence.',0),(4,'fksdl;','2008-06-22',2,'1',1,2,'article4.txt','jfsdkl','jfksdl.',0),(6,'Article 6 - feature','2008-07-01',3,'1',2,0,'article6.txt','this is a feature abstract.','this is a feature pull quote.',0),(7,'article 7','2008-07-01',2,'1',2,0,'article7.txt','article 7 - sports- abstract','article 7 pull quote',0),(8,'article 8','2008-07-01',5,'1',2,0,'article8.txt','article 8 - opinion - abstract','article 8 pull quote',0),(9,'Article 9 - sports','2008-07-02',2,'1',2,0,'article9.txt','this is article 9 abstract.','article 9 pull.',0),(10,'article 10','2008-07-02',5,'1',2,0,'article10.txt','article 10 is opinionated','article 10 pull',0),(11,'Article 11 Featuer','2008-07-02',3,'1',2,0,'article11.txt','Feature 11','Pull 11',0),(12,'News 12','2008-07-02',1,'1',2,0,'article12.txt','News 12 abstract.','Pull 12.',0),(13,'Feature 13','2008-07-02',3,'1',2,0,'article13.txt','13 abstract.','13 pull',0),(14,'Flags of the World','2008-07-28',1,'1',2,0,'article14.txt','See the flags of the world.','Featured flags from Australia. And another.',0),(15,'No media yet.','2008-07-28',2,'1',2,0,'article15.txt','This article does not have a media yet.','Which media file will she use?',0),(16,'sports article','2008-08-06',2,'1',3,5,'article16.txt','this is another sports article','pull for sports',0),(17,'sports for ou','2008-08-06',2,'1',3,5,'article17.txt','sports for you','sports and more',0),(18,'more and more sports','2008-08-06',2,'1',3,5,'article18.txt','UNK sports are great','Go lopers',0),(19,'last sports article','2008-08-06',2,'1',3,5,'article19.txt','for issue 3','issue 3 sport',0),(20,'Test for CSIS 380','2008-08-28',3,'1',3,0,'article20.txt','This is a new feature for 380.','This is the first sentence of the pull quote. And the second.',0),(21,'A new article with picture','2008-08-28',1,'1',3,0,'article21.txt','this article has a photo.','please add the photo.',0),(22,'Fact Gathering','2008-09-09',1,'1',3,0,'article22.txt','Fact Gathering Assignment','Assignments that everyone must complete',0),(24,'testing','2008-09-09',5,'1',3,0,'article24.txt','just testing','looking around',0),(25,'This is a news test.','2008-09-16',1,'1',3,0,'article25.txt','What a great new article.\r\nI hope we can be functioning soon.','Go Lopers.',0),(26,'Another Sample','2008-09-16',1,'1',3,0,'article26.txt','this is another article.','sample pull.',0),(27,'a third.','2008-09-16',1,'1',3,0,'article27.txt','Third try.','Does this have a photo?',0),(28,'Will this post?','2008-09-17',1,'1',3,0,'article28.txt','test','testing, 1, 2, 3',0),(29,'Photo Reference','2008-09-17',1,'1',3,0,'article29.txt','What','It is a great day, said Judy Hosier who was joined by othere dedicated to their cause at the 17th annual aids walk on sunday, sept. 14.',0),(30,'Nanette;s Article','2008-09-19',3,'1',3,0,'article30.txt','My first publication','Blah',0),(31,'This is a news story','2008-09-21',1,'1',3,0,'article31.txt','News story test','This is a news story test',0),(33,'This is a feature story','2008-09-21',3,'1',3,0,'article33.txt','This is a feature story test abstract','Pull quote for test feature story',0),(34,'This is a opinion story','2008-09-21',5,'1',3,0,'article34.txt','Test abstract for an opinion story','Pull quote test for an opinion story',0),(35,'This is a sports story','2008-09-21',2,'1',3,0,'article35.txt','Abstract test for sports','Pull quote test for sports',0),(36,'Test Golf Story','2008-09-21',2,'1',3,0,'article36.txt','This is the test abstract for the Golf Story','Pull quote for test golf story',0),(43,'News Article','2008-09-25',1,'1',5,0,'article43.txt','This is a news article abstract','This is a news article pull quote',0),(44,'Sports Article','2008-09-25',2,'1',5,0,'article44.txt','Sports Abstract','Sports Pull Quote',0),(45,'Feature Article','2008-09-25',3,'1',5,0,'article45.txt','Feature abstract','Feature abstract',0),(46,'This is a very long title.  ','2008-10-14',2,'0',5,0,'article46.txt','This is a long title abstract.','Pull long. Long pull.',0),(47,'This is a test','2008-10-30',1,'1',5,3,'article47.txt','fhklsd','fjsakl',0),(48,'blah','2008-11-04',1,'0',5,3,'article48.txt','blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah','blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah',0),(49,'blah blah blah blah','2008-11-04',1,'0',5,3,'article49.txt','blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah','blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah',0),(50,'','2008-11-04',4,'0',5,3,'article50.txt','','',0),(51,'SPORTS!!!!','2008-11-13',2,'1',5,3,'article51.txt','nebraska football','nebraska football',0),(52,'test','2008-11-13',1,'0',5,3,'article52.txt','test','test',0),(53,'Sherri Test new Submit Media','2008-11-18',1,'1',5,0,'article53.txt','News with Media sherri','Sherri is testing submit media with news article. Water lilly picture.',0),(54,'TEST Photo','2008-12-05',4,'0',5,3,'article54.txt','','My Test Photo',0);
+
+/*Table structure for table `articlephoto` */
+
+DROP TABLE IF EXISTS `articlephoto`;
+
+CREATE TABLE `articlephoto` (
+  `photoId` int(11) NOT NULL,
+  `articleId` int(11) NOT NULL,
+  PRIMARY KEY  (`photoId`,`articleId`),
+  KEY `FK_articleWithPhoto` (`articleId`),
+  CONSTRAINT `FK_aphoto` FOREIGN KEY (`photoId`) REFERENCES `media` (`photoId`) ON UPDATE CASCADE,
+  CONSTRAINT `FK_articleWithPhoto` FOREIGN KEY (`articleId`) REFERENCES `article` (`articleId`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `articlephoto` */
+
+insert  into `articlephoto`(`photoId`,`articleId`) values (2,2),(4,3),(7,8),(7,9),(7,10),(7,11),(9,12),(8,15),(14,26),(22,28),(18,29),(17,30),(19,31),(20,36),(23,43),(24,44),(25,45),(26,47),(23,48),(24,49),(25,50),(30,53);
+
+/*Table structure for table `byline` */
+
+DROP TABLE IF EXISTS `byline`;
+
+CREATE TABLE `byline` (
+  `BylineID` int(11) NOT NULL auto_increment,
+  `FirstName` varchar(30) NOT NULL,
+  `LastName` varchar(30) NOT NULL,
+  `GroupID` int(11) NOT NULL,
+  PRIMARY KEY  (`BylineID`),
+  KEY `FK_byline` (`GroupID`),
+  CONSTRAINT `FK_byline_category` FOREIGN KEY (`GroupID`) REFERENCES `usercategory` (`groupId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `byline` */
+
+insert  into `byline`(`BylineID`,`FirstName`,`LastName`,`GroupID`) values (1,'Kaitlyn','Noone',1),(2,'Aubrie','Hill',1),(3,'Steve','Wilbert',5),(4,'DeeDee','Younghans',1),(5,'Billy','Bob',3),(6,'John ','Photographer',4),(7,'Nanette ','Hogg',2),(8,'Sherri','Harms',5),(9,'Eric','Korth',7);
+
+/*Table structure for table `gallery` */
+
+DROP TABLE IF EXISTS `gallery`;
+
+CREATE TABLE `gallery` (
+  `galleryId` int(6) NOT NULL,
+  `issueOfPhoto` int(4) NOT NULL,
+  `nameOfGallery` varchar(50) NOT NULL,
+  `folderOfPhoto` varchar(100) NOT NULL,
+  PRIMARY KEY  (`galleryId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `gallery` */
+
+insert  into `gallery`(`galleryId`,`issueOfPhoto`,`nameOfGallery`,`folderOfPhoto`) values (1,1,'Man Bites Dog','number1'),(2,2,'Spring Break','number2'),(3,3,'Fall Issue 1','number3'),(5,5,'Fall Issue 5','number5');
+
+/*Table structure for table `issue` */
+
+DROP TABLE IF EXISTS `issue`;
+
+CREATE TABLE `issue` (
+  `issueId` int(6) NOT NULL,
+  `volume` int(4) NOT NULL,
+  `number` int(3) NOT NULL,
+  `issueDate` date NOT NULL,
+  `openIssue` binary(1) NOT NULL default '1',
+  `semester` varchar(6) default NULL,
+  `chosenGallery` int(6) NOT NULL,
+  PRIMARY KEY  (`issueId`),
+  KEY `FK_issue` (`chosenGallery`),
+  CONSTRAINT `FK_issue` FOREIGN KEY (`chosenGallery`) REFERENCES `gallery` (`galleryId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `issue` */
+
+insert  into `issue`(`issueId`,`volume`,`number`,`issueDate`,`openIssue`,`semester`,`chosenGallery`) values (1,1,1,'2008-04-01','0','Spring',1),(2,1,2,'2008-05-01','0','Summer',2),(3,1,3,'2008-08-06','0','Fall',3),(5,108,5,'2008-10-01','1','Fall',5);
+
+/*Table structure for table `link` */
+
+DROP TABLE IF EXISTS `link`;
+
+CREATE TABLE `link` (
+  `urlId` int(6) NOT NULL,
+  `linkUrl` varchar(100) NOT NULL,
+  `linkTitle` varchar(50) NOT NULL,
+  `imageAddress` varchar(100) default NULL,
+  `linkCategory` varchar(20) NOT NULL,
+  `defaultLink` tinyint(1) NOT NULL,
+  PRIMARY KEY  (`urlId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `link` */
+
+insert  into `link`(`urlId`,`linkUrl`,`linkTitle`,`imageAddress`,`linkCategory`,`defaultLink`) values (0,'http://www.myspace.com','MySpace','http://www.myspace.com','no',1),(1,'http://unk.facebook.com','UNK Facebook','','yes',1),(2,'http://www.unk.edu','UNK Homepage',NULL,'yes',1),(3,'http://blackboard.unk.edu/webapps/portal/frameset.jsp','Blackboard',NULL,'yes',1),(4,'https://unkmail2.unk.edu/','UNK Email System',NULL,'yes',1),(5,'http://www.lopers.com/','Lopers.com',NULL,'yes',1),(6,'http://webeasi.unk.edu/','WebEASI',NULL,'yes',1),(7,'http://www.unk.edu/news/EventsCalendar/','Events Calendar',NULL,'yes',1);
+
+/*Table structure for table `media` */
+
+DROP TABLE IF EXISTS `media`;
+
+CREATE TABLE `media` (
+  `photoId` int(8) NOT NULL,
+  `dateOfPhoto` date NOT NULL,
+  `caption` varchar(500) NOT NULL,
+  `gallery` int(6) default NULL,
+  `filetype` varchar(50) default '',
+  `link` varchar(100) NOT NULL,
+  `photographer` int(4) NOT NULL,
+  `issue` int(6) NOT NULL,
+  `thumbnail` varchar(50) NOT NULL,
+  PRIMARY KEY  (`photoId`),
+  KEY `FK_mediaUser` (`photographer`),
+  KEY `FK_media_issue` (`issue`),
+  KEY `FK_media` (`gallery`),
+  CONSTRAINT `FK_media` FOREIGN KEY (`gallery`) REFERENCES `gallery` (`galleryId`) ON DELETE NO ACTION ON UPDATE CASCADE,
+  CONSTRAINT `FK_media_issue` FOREIGN KEY (`issue`) REFERENCES `issue` (`issueId`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `media` */
+
+insert  into `media`(`photoId`,`dateOfPhoto`,`caption`,`gallery`,`filetype`,`link`,`photographer`,`issue`,`thumbnail`) values (2,'2008-04-04','Demo:  Fences and construction equipement- the new',1,'picture','Tree.jpg',1,1,'Tree.jpg'),(3,'2008-04-05','This is a test image - cats meow',1,'picture','Tree2.jpg',3,1,'Tree2.jpg'),(4,'2008-04-06','This is a second test image - dogs bark',2,'picture','Tree3.jpg',2,2,'Tree3.jpg'),(5,'2008-05-08','This is a video of a woodpecker',2,NULL,'woodpecker.wmv',3,2,'woodpecker.jpg'),(6,'2008-05-08','This is another woodpecker video',2,NULL,'woodpecker1.wmv',3,2,'woodpecker1.jpg'),(7,'2008-07-01','Cartoon guy',2,'picture','cartoonguy.jpg',3,2,'cartoonguy.jpg'),(8,'2008-07-28','flags',2,'picture','Argentina.gif',3,2,'Australia.gif'),(9,'2008-08-07','bb girl',3,'picture','bbgirl.jpg',3,3,'bbgirl.jpg'),(10,'2008-08-07','girl.',3,'picture','girl.jpg',3,3,'girl.jpg'),(11,'2008-08-07','arrow.',3,'picture','arrow.gif',3,3,'arrow.gif'),(12,'2008-08-26','This is a garden.',3,'picture','Garden.jpg',3,3,'Green Sea Turtle.jpg'),(13,'2008-09-09','these photos are different',3,'picture','Blue hills.jpg',3,3,'Winter.jpg'),(14,'2008-09-16','yummy smores',3,'picture','smores 003.jpg',3,3,'smores 003.jpg'),(15,'2008-09-16','smores and grand kids.',3,'picture','smores 005.jpg',3,3,'smores 005.jpg'),(16,'2008-09-17','UNK vs. UNO Football Game',3,'video','Football2.mov',3,3,'Football2.jpg'),(17,'2008-09-19','She is beautiful ',3,'picture','Shaylee.jpg',3,3,'thumbnail.jpg'),(18,'2008-09-19','this is pasted text',3,'picture','house.jpg',3,3,'houseThumb.jpg'),(19,'2008-09-21','This is a text picture from the AIDS walk.',3,'picture','bloons_aidswalk.jpg',3,3,'sm_bloons_aidswalk.jpg'),(20,'2008-09-21','This is a test caption for the golf picture',3,'picture','golf.jpg',3,3,'sm_golf.jpg'),(21,'2008-09-22','Summer vacation in Steamboat, Colo.',3,'picture','steamboat.jpg',3,3,'steamboat.jpg'),(22,'2008-09-22','This image is from my family vacation.',3,'picture','steamboat2.jpg',3,3,'steamboat2.jpg'),(23,'2008-10-10','Career Fair picture',5,'picture','CareerFinal.jpg',3,5,'CareerFinal.jpg'),(24,'2008-10-12','Blue and Gold day',5,'picture','CfairspeerFinal.jpg',3,5,'CfairspeerFinal.jpg'),(25,'2008-10-14','SAAC Day',5,'picture','SAAC.jpg',3,5,'SAAC.jpg'),(26,'2008-10-16','Shaylee and Andrew',5,'picture','Shaylee and Andrew.jpg',3,5,'Shaylee and Andrew.jpg'),(28,'2008-11-18','Blue Hills',3,'picture','Blue hills.jpg',3,3,'Blue hills.jpg'),(29,'2008-11-18','Quilt',3,'picture','Quilt.jpg',3,3,'quilt2tn.jpg'),(30,'2008-11-18','water lillies -- sherri test.',5,'picture','Water lilies.jpg',3,5,'Water lilies.jpg'),(31,'2008-12-05','nice sunset',5,'picture','Sunset.jpg',3,5,'Sunset.jpg'),(32,'2008-12-05','movie',5,'video','terminator4.mp4',3,5,'t4hotf.jpg');
+
+/*Table structure for table `newscategory` */
+
+DROP TABLE IF EXISTS `newscategory`;
+
+CREATE TABLE `newscategory` (
+  `newsCategoryId` int(2) NOT NULL auto_increment,
+  `categoryForNews` varchar(50) NOT NULL,
+  PRIMARY KEY  (`newsCategoryId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `newscategory` */
+
+insert  into `newscategory`(`newsCategoryId`,`categoryForNews`) values (1,'News'),(2,'Sports'),(3,'Features'),(4,'Media Gallery'),(5,'Opinions');
+
+/*Table structure for table `newsfeed` */
+
+DROP TABLE IF EXISTS `newsfeed`;
+
+CREATE TABLE `newsfeed` (
+  `newsfeedId` int(4) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `category` int(2) default NULL,
+  `logo` varchar(50) default NULL,
+  `feedUrl` varchar(100) NOT NULL,
+  `moreTitle` varchar(50) NOT NULL,
+  `link` varchar(50) NOT NULL,
+  PRIMARY KEY  (`newsfeedId`),
+  KEY `FK_newsfeed` (`category`),
+  CONSTRAINT `FK_newsfeed` FOREIGN KEY (`category`) REFERENCES `newscategory` (`newsCategoryId`) ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `newsfeed` */
+
+insert  into `newsfeed`(`newsfeedId`,`title`,`category`,`logo`,`feedUrl`,`moreTitle`,`link`) values (0,'CNN Top Stories',1,'../images/feed_images/cnn_logo.gif','http://rss.cnn.com/rss/cnn_topstories.rss','More Top Stories','http://www.cnn.com'),(1,'Sports Illustraed',2,'../images/feed_images/si_logo.gif','http://rss.cnn.com/rss/si_topstories.rss','More Top Stories','http://www.sportsillustrated.cnn.com'),(2,'CNN Money',3,'../images/feed_images/cnnmoney_logo.gif','http://rss.cnn.com/rss/money_topstories.rss','More Top Stories','http://www.cnnmoney.com'),(3,'Time Magazine',1,'../images/feed_images/time_logo.gif','http://feeds.feedburner.com/time/topstories','More Time','http://www.time.com'),(4,'People Magazine',4,'../images/feed_images/people_logo.gif','http://rss.people.com/web/people/rss/topheadlines/','More People','http://www.people.com/people'),(5,'Kearney Hub News',5,'../images/feed_images/hub_logo.jpg','http://www.kearneyhub.com/site/rss/?Kearney%20Hub/Home/Area%20News/Kearney%2DArea%20News','More Kearney Hub','http://www.kearneyhub.com/site/news.asp?brd=268&pa'),(6,'Kearney Hub Sports',2,'../images/feed_images/hub_logo.jpg','http://www.kearneyhub.com/site/rss/?Kearney%20Hub/Home/Sports/Kearney%2DArea%20Sports','More Hub Sports','http://www.kearneyhub.com/site/news.asp?brd=268&na'),(7,'MSNBC Top Stories',1,'../images/feed_images/msnbc_logo.jpg','http://rss.msnbc.msn.com/id/3032091/device/rss/rss','More Top Stories','http://www.msnbc.com'),(8,'Fox News Top Stories',1,'../images/feed_images/fox_logo.jpg','http://www.foxnews.com/xmlfeed/rss/0,4313,0,00.rss','More Top Stories','http://www.foxnews.com'),(9,'MTV News',4,'../images/feed_images/mtv_logo.jpg','http://feeds.feedburner.com/MtvOverdriveNews','More MTV news','http://www.mtv.com'),(14,'ESPN Top Stories',2,'../images/feed_images/espn_logo.jpg','http://sports-ak.espn.go.com/espn/rss/news','More ESPN','http://www.espn.com'),(15,'Entertainment Weekly',4,'../images/feed_images/ew_logo.gif','http://rss.ew.com/web/ew/rss/todayslatest/index.xm','More Entertainment Weekley','http://www.ew.com');
+
+/*Table structure for table `user` */
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
+  `userId` int(4) NOT NULL,
+  `userName` varchar(50) NOT NULL,
+  `passwordHash` longtext NOT NULL,
+  `firstName` varchar(50) NOT NULL,
+  `lastName` varchar(50) NOT NULL,
+  `title` varchar(50) NOT NULL,
+  `photo` varchar(50) NOT NULL,
+  `approval` tinyint(1) NOT NULL,
+  `dateadded` date NOT NULL,
+  `current` bit(1) NOT NULL,
+  `email` varchar(30) NOT NULL,
+  `bylineID` int(11) NOT NULL,
+  PRIMARY KEY  (`userId`),
+  KEY `FK_user_byline` (`bylineID`),
+  CONSTRAINT `FK_user_byline` FOREIGN KEY (`bylineID`) REFERENCES `byline` (`BylineID`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `user` */
+
+insert  into `user`(`userId`,`userName`,`passwordHash`,`firstName`,`lastName`,`title`,`photo`,`approval`,`dateadded`,`current`,`email`,`bylineID`) values (0,'demoSteve','9876','Steve','Wilbert','Staff Writer','southparkguy.jpg',1,'0000-00-00','\0','',3),(1,'demoY','d1a2y3','DeeDee','Younghans','Web Master','girl.jpg',1,'0000-00-00','\0','',4),(2,'demoB','b1o2b3','Billy','Bob','Student Editor','cartoonguy.jpg',1,'0000-00-00','\0','',5),(3,'demoPhoto','1234','John','Photographer','Photographer','Tree.jpg',1,'0000-00-00','\0','',6),(4,'hoggn','1234','Nanette','Hogg','Faculty Advisor','bbgirl.jpg',1,'0000-00-00','\0','',7),(5,'sherri','23r4','Sherri','Harms','Staff Writer','girl.jpg',1,'0000-00-00','\0','',8),(6,'noonekc','b7XFN6','Kaitlyn','Noone','Assistant Web Master','girl.jpg',1,'0000-00-00','\0','noonekc@unk.edu',1),(7,'hilla1','WDJNGF','Aubrie','Hill','Web Master','girl.jpg',1,'0000-00-00','\0','hilla1@unk.edu',2);
+
+/*Table structure for table `usercategory` */
+
+DROP TABLE IF EXISTS `usercategory`;
+
+CREATE TABLE `usercategory` (
+  `groupId` int(2) NOT NULL auto_increment,
+  `groupName` varchar(50) NOT NULL,
+  PRIMARY KEY  (`groupId`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+/*Data for the table `usercategory` */
+
+insert  into `usercategory`(`groupId`,`groupName`) values (1,'WebMaster'),(2,'Faculty Advisor'),(3,'Student Editor'),(4,'Photographer'),(5,'Antelope Staff'),(6,'Guest Writer'),(7,'UNK\'s College Football Columnist');
+
+/*Table structure for table `articlebyline` */
+
+DROP TABLE IF EXISTS `articlebyline`;
+
+/*!50001 DROP VIEW IF EXISTS `articlebyline` */;
+/*!50001 DROP TABLE IF EXISTS `articlebyline` */;
+
+/*!50001 CREATE TABLE `articlebyline` (
+  `articleId` int(8) NOT NULL default '0',
+  `articleTitle` varchar(100) NOT NULL default '',
+  `authorFirstName` varchar(50) NOT NULL default '',
+  `authorLastName` varchar(50) NOT NULL default '',
+  `authorTitle` varchar(50) NOT NULL default ''
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 */;
+
+/*Table structure for table `articleinfo` */
+
+DROP TABLE IF EXISTS `articleinfo`;
+
+/*!50001 DROP VIEW IF EXISTS `articleinfo` */;
+/*!50001 DROP TABLE IF EXISTS `articleinfo` */;
+
+/*!50001 CREATE TABLE `articleinfo` (
+  `articleId` int(8) NOT NULL default '0',
+  `articleTitle` varchar(100) NOT NULL default '',
+  `authorFirstName` varchar(50) NOT NULL default '',
+  `authorLastName` varchar(50) NOT NULL default '',
+  `authorTitle` varchar(50) NOT NULL default '',
+  `dateOfArticle` date NOT NULL default '0000-00-00',
+  `volume` int(4) NOT NULL default '0',
+  `number` int(3) NOT NULL default '0',
+  `category` varchar(50) NOT NULL default '',
+  `articleBody` varchar(100) default NULL,
+  `Abstract` varchar(500) default NULL,
+  `approved` binary(1) NOT NULL default ' ',
+  `pullQuote` varchar(200) default NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 */;
+
+/*Table structure for table `photobyline` */
+
+DROP TABLE IF EXISTS `photobyline`;
+
+/*!50001 DROP VIEW IF EXISTS `photobyline` */;
+/*!50001 DROP TABLE IF EXISTS `photobyline` */;
+
+/*!50001 CREATE TABLE `photobyline` (
+  `photoId` int(8) NOT NULL default '0',
+  `photographerFirstName` varchar(50) NOT NULL default '',
+  `photographerLastName` varchar(50) NOT NULL default '',
+  `photographerByline` varchar(50) NOT NULL default ''
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 */;
+
+/*Table structure for table `photoinfo` */
+
+DROP TABLE IF EXISTS `photoinfo`;
+
+/*!50001 DROP VIEW IF EXISTS `photoinfo` */;
+/*!50001 DROP TABLE IF EXISTS `photoinfo` */;
+
+/*!50001 CREATE TABLE `photoinfo` (
+  `photoId` int(8) NOT NULL default '0',
+  `photographerFirstName` varchar(50) NOT NULL default '',
+  `photographerLastName` varchar(50) NOT NULL default '',
+  `dateOfPhoto` date NOT NULL default '0000-00-00',
+  `caption` varchar(500) NOT NULL default '',
+  `link` varchar(100) NOT NULL default ''
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 */;
+
+/*View structure for view articlebyline */
+
+/*!50001 DROP TABLE IF EXISTS `articlebyline` */;
+/*!50001 DROP VIEW IF EXISTS `articlebyline` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `articlebyline` AS (select `article`.`articleId` AS `articleId`,`article`.`articleTitle` AS `articleTitle`,`user`.`firstName` AS `authorFirstName`,`user`.`lastName` AS `authorLastName`,`user`.`title` AS `authorTitle` from (`article` join `user`) where (`article`.`authorId` = `user`.`userId`)) */;
+
+/*View structure for view articleinfo */
+
+/*!50001 DROP TABLE IF EXISTS `articleinfo` */;
+/*!50001 DROP VIEW IF EXISTS `articleinfo` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `articleinfo` AS (select `article`.`articleId` AS `articleId`,`article`.`articleTitle` AS `articleTitle`,`user`.`firstName` AS `authorFirstName`,`user`.`lastName` AS `authorLastName`,`user`.`title` AS `authorTitle`,`article`.`dateOfArticle` AS `dateOfArticle`,`issue`.`volume` AS `volume`,`issue`.`number` AS `number`,`newscategory`.`categoryForNews` AS `category`,`article`.`articleBody` AS `articleBody`,`article`.`Abstract` AS `Abstract`,`article`.`approved` AS `approved`,`article`.`pullQuote` AS `pullQuote` from (((`article` join `user`) join `newscategory`) join `issue`) where ((`article`.`authorId` = `user`.`userId`) and (`article`.`category` = `newscategory`.`newsCategoryId`) and (`issue`.`issueId` = `article`.`issueOfArticle`))) */;
+
+/*View structure for view photobyline */
+
+/*!50001 DROP TABLE IF EXISTS `photobyline` */;
+/*!50001 DROP VIEW IF EXISTS `photobyline` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `photobyline` AS (select `media`.`photoId` AS `photoId`,`user`.`firstName` AS `photographerFirstName`,`user`.`lastName` AS `photographerLastName`,`user`.`title` AS `photographerByline` from (`user` join `media`) where (`user`.`userId` = `media`.`photographer`)) */;
+
+/*View structure for view photoinfo */
+
+/*!50001 DROP TABLE IF EXISTS `photoinfo` */;
+/*!50001 DROP VIEW IF EXISTS `photoinfo` */;
+
+/*!50001 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`%` SQL SECURITY DEFINER VIEW `photoinfo` AS (select `media`.`photoId` AS `photoId`,`user`.`firstName` AS `photographerFirstName`,`user`.`lastName` AS `photographerLastName`,`media`.`dateOfPhoto` AS `dateOfPhoto`,`media`.`caption` AS `caption`,`media`.`link` AS `link` from (`user` join `media`) where (`user`.`userId` = `media`.`photographer`)) */;
+
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;

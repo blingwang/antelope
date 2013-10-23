@@ -1,0 +1,34 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+    <title>The Antelope</title>
+    <%= stylesheet_link_tag 'styles' %>
+    <%= stylesheet_link_tag 'scaffold' %>
+    <%= javascript_include_tag :defaults %>
+    <%= active_scaffold_includes %>
+  </head>
+
+  <body>
+    <div id="maincontainer">
+      <div id="topsection"><div id="header"><img style="float:left;" src="images/loperHead.gif">
+          <div id="links">
+            <%= link_to "Ads", ads_path %> | <%= link_to "Articles", articles_path %>
+            | <%= link_to "Authors", bylines_path %> | <%= link_to "Galleries", galleries_path %> | <%= link_to "Categories", news_categories_path %>
+            | <%= link_to "Issues", issues_path %> | <%= link_to "News Feeds", news_feeds_path %> | <%= link_to "Users", users_path %>
+            | <%= link_to "User Groups", user_categories_path %> | <%= link_to "Media", media_path %> | <%= link_to "Links", links_path %>
+          </div>
+        </div>
+      </div>
+      <div id="contentwrapper">
+        <div id="contentcolumn">
+          <%= yield %>
+        </div>
+      </div>
+      <div id="footer">
+        <a href="http://www.unk.edu">UNK Home</a>
+      </div>
+    </div>
+  </body>
+</html>

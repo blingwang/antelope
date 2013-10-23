@@ -1,0 +1,31 @@
+9
+
+dir
+90
+http://svn.genxian.com/antelope/trunk/vendor/plugins
+http://svn.genxian.com/antelope
+
+
+
+2009-04-29T15:34:38.366449Z
+87
+wang
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+b521482e-0966-0410-96f8-e45c6831ee82
+
+active_scaffold
+dir
+

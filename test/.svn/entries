@@ -1,0 +1,77 @@
+9
+
+dir
+90
+http://svn.genxian.com/antelope/trunk/test
+http://svn.genxian.com/antelope
+
+
+
+2009-04-29T12:38:01.906773Z
+84
+wang
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+b521482e-0966-0410-96f8-e45c6831ee82
+
+unit
+dir
+
+test_helper.rb
+file
+
+
+
+
+2009-04-16T22:25:41.856916Z
+30478106e9df8977e79fc045df799e29
+2009-03-26T18:20:17.213150Z
+4
+hauff
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+1797
+
+performance
+dir
+
+functional
+dir
+
+integration
+dir
+
+fixtures
+dir
+

@@ -1,0 +1,34 @@
+9
+
+dir
+90
+http://svn.genxian.com/antelope/trunk/app/views
+http://svn.genxian.com/antelope
+
+
+
+2009-04-29T12:38:01.906773Z
+84
+wang
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+b521482e-0966-0410-96f8-e45c6831ee82
+
+layouts
+dir
+
+dashboard
+dir
+

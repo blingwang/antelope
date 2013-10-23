@@ -1,0 +1,135 @@
+9
+
+dir
+90
+http://svn.genxian.com/antelope/trunk
+http://svn.genxian.com/antelope
+
+
+
+2009-04-30T21:53:16.040336Z
+90
+wang
+
+
+svn:special svn:externals svn:needs-lock
+
+
+
+
+
+
+
+
+
+
+
+b521482e-0966-0410-96f8-e45c6831ee82
+
+test
+dir
+
+app
+dir
+
+log
+dir
+
+Rakefile
+file
+
+
+
+
+2009-04-16T22:26:44.346941Z
+17f2f134da4cd31ea095d5868ca89e86
+2009-03-26T18:20:17.213150Z
+4
+hauff
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+307
+
+db
+dir
+
+nbproject
+dir
+
+php
+dir
+
+vendor
+dir
+
+README
+file
+
+
+
+
+2009-04-16T22:26:44.346941Z
+0cdf56769f20a2b73a929ac3ba633152
+2009-03-26T18:20:17.213150Z
+4
+hauff
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+10619
+
+tmp
+dir
+
+script
+dir
+
+config
+dir
+
+doc
+dir
+
+lib
+dir
+
+public
+dir
+

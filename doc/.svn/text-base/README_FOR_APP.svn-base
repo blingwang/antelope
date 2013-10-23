@@ -1,0 +1,13 @@
+Antelope Admin Authors:
+Brandon Hauff - bhauff@gmail.com
+Jianguo Wang - wangj2@unk.edu from home
+Jeff Sylvester - jeffsyl@gmail.com from home.
+Derek Ruppert - ruppertdj@unk.edu did it from home
+Michael Andrews - andrewsmd@unk.edu edited from home whooohoo!!!
+Michael Horky - horkyml@unk.edu from home after Michael Andrews's Woohoo
+
+To build the guides:
+
+* Install source-highlighter (http://www.gnu.org/software/src-highlite/source-highlight.html)
+* Install the mizuho gem (http://github.com/FooBarWidget/mizuho/tree/master)
+* Run `rake guides` from the railties directory
